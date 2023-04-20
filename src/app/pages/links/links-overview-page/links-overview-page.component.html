@@ -1,0 +1,33 @@
+<div class="links-page page">
+  <div class="links-overview">
+    <mat-table [dataSource]="dataSource">
+      <!-- User name Definition -->
+      <ng-container matColumnDef="shortCode">
+        <mat-header-cell *matHeaderCellDef> shortCode </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.shortCode }} </mat-cell>
+      </ng-container>
+
+      <!-- Age Definition -->
+      <ng-container matColumnDef="targetUrl">
+        <mat-header-cell *matHeaderCellDef> targetUrl </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.targetUrl }} </mat-cell>
+      </ng-container>
+
+      <!-- Title Definition -->
+      <ng-container matColumnDef="createdOn">
+        <mat-header-cell *matHeaderCellDef> createdOn </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.createdOn | date }} </mat-cell>
+      </ng-container>
+
+      <!-- Header and Row Declarations -->
+      <mat-header-row
+        *matHeaderRowDef="['shortCode', 'targetUrl', 'createdOn']"
+      >
+      </mat-header-row>
+      <mat-row
+        *matRowDef="let row; columns: ['shortCode', 'targetUrl', 'createdOn']"
+      >
+      </mat-row>
+    </mat-table>
+  </div>
+</div>

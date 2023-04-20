@@ -13,6 +13,12 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LandingModule } from './pages/landing/landing.module';
 import { AuthModule, AuthHttpInterceptor } from '@auth0/auth0-angular';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LinksModule } from './pages/links/links.module';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { INITIAL_APPSTATE, reducers } from './state/app.state';
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -22,9 +28,14 @@ export function createTranslateLoader(http: HttpClient) {
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
+    StoreModule.forRoot(reducers, {
+      initialState: INITIAL_APPSTATE,
+    }),
     HttpClientModule,
     LandingModule,
+    LinksModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -53,7 +64,7 @@ export function createTranslateLoader(http: HttpClient) {
             },
           },
           {
-            uri: 'https://localhost:32770/api/*',
+            uri: 'https://localhost:7098/api/*',
             tokenOptions: {
               authorizationParams: {
                 audience: 'https://api.tinylnk.nl',
@@ -64,6 +75,8 @@ export function createTranslateLoader(http: HttpClient) {
         ],
       },
     }),
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([]),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
