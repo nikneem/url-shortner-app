@@ -18,6 +18,9 @@ import { LinksModule } from './pages/links/links.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { INITIAL_APPSTATE, reducers } from './state/app.state';
+import { ShortLinkDetailsEffects } from './state/shortlinkdetails/shortlinkdetails.effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ShortLinkListEffects } from './state/shortLinksList/shortlinklist.effects';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -33,6 +36,18 @@ export function createTranslateLoader(http: HttpClient) {
     StoreModule.forRoot(reducers, {
       initialState: INITIAL_APPSTATE,
     }),
+    EffectsModule.forRoot(ShortLinkDetailsEffects, ShortLinkListEffects),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: false,
+      autoPause: true,
+      features: {
+        pause: false,
+        lock: true,
+        persist: true,
+      },
+    }),
+
     HttpClientModule,
     LandingModule,
     LinksModule,
@@ -75,8 +90,6 @@ export function createTranslateLoader(http: HttpClient) {
         ],
       },
     }),
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },

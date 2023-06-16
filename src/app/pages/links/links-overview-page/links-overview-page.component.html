@@ -3,29 +3,56 @@
     <mat-table [dataSource]="dataSource">
       <!-- User name Definition -->
       <ng-container matColumnDef="shortCode">
-        <mat-header-cell *matHeaderCellDef> shortCode </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef translate class="column-short-code">
+          shortlinks.list.columns.shortCode
+        </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{ row.shortCode }} </mat-cell>
       </ng-container>
 
       <!-- Age Definition -->
       <ng-container matColumnDef="targetUrl">
-        <mat-header-cell *matHeaderCellDef> targetUrl </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef translate>
+          shortlinks.list.columns.targetUrl
+        </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{ row.targetUrl }} </mat-cell>
       </ng-container>
 
       <!-- Title Definition -->
       <ng-container matColumnDef="createdOn">
-        <mat-header-cell *matHeaderCellDef> createdOn </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef translate>
+          shortlinks.list.columns.createdOn
+        </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{ row.createdOn | date }} </mat-cell>
+      </ng-container>
+
+      <!-- Actions -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef translate>
+          shortlinks.list.columns.actions
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button
+            mat-icon-button
+            color="accent"
+            aria-label="Example icon button with a home icon"
+            (click)="deleteLink(row.id)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
       </ng-container>
 
       <!-- Header and Row Declarations -->
       <mat-header-row
-        *matHeaderRowDef="['shortCode', 'targetUrl', 'createdOn']"
+        *matHeaderRowDef="['shortCode', 'targetUrl', 'createdOn', 'actions']"
       >
       </mat-header-row>
       <mat-row
-        *matRowDef="let row; columns: ['shortCode', 'targetUrl', 'createdOn']"
+        *matRowDef="
+          let row;
+          columns: ['shortCode', 'targetUrl', 'createdOn', 'actions']
+        "
+        (click)="openDetailsDialog(row)"
       >
       </mat-row>
     </mat-table>

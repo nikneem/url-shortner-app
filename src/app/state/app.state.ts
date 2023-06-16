@@ -1,14 +1,25 @@
-import { shortLinksReducer } from './links/links.reducer';
-import { IShortLinksState, initialShortLinksState } from './links/links.state';
+import { shortLinksApiReducer } from './shortLinksList/shortlinklist.reducer';
+import {
+  IShortLinkListState,
+  initialShortLinksListState,
+} from './shortLinksList/shortlinklist.state';
+import { shortLinksReducer } from './shortlinkdetails/shortlinkdetails.reducer';
+import {
+  IShortLinkDetailsState,
+  initialShortLinkDetailsState,
+} from './shortlinkdetails/shortlinkdetails.state';
 
 export interface IAppState {
-  shortLinks: IShortLinksState;
+  shortLinkDetails: IShortLinkDetailsState;
+  shortLinkList: IShortLinkListState;
 }
 
 export const INITIAL_APPSTATE: IAppState = {
-  shortLinks: initialShortLinksState,
+  shortLinkDetails: initialShortLinkDetailsState,
+  shortLinkList: initialShortLinksListState,
 };
 
 export const reducers = {
-  shortLinks: shortLinksReducer,
+  shortLinkDetails: shortLinksReducer,
+  shortLinkList: shortLinksApiReducer,
 };

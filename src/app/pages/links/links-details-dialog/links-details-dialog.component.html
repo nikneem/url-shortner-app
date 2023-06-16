@@ -1,0 +1,23 @@
+<h1 mat-dialog-title translate>shortlinks.details.title</h1>
+<div mat-dialog-content>
+  <div *ngIf="shortLinkDetailsForm">
+    <form [formGroup]="shortLinkDetailsForm" novalidate>
+      <mat-form-field class="full-with">
+        <mat-label>shortlinks.details.shortlink</mat-label>
+        <input matInput formControlName="shortLink" />
+      </mat-form-field>
+      <mat-form-field class="full-with">
+        <mat-label>shortlinks.details.targetUrl</mat-label>
+        <input matInput formControlName="targetUrl" />
+      </mat-form-field>
+      <mat-form-field class="full-with">
+        <mat-label>shortlinks.details.expiresOn</mat-label>
+        <input matInput formControlName="expiresOn" />
+      </mat-form-field>
+    </form>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>No</button>
+  <button mat-button mat-dialog-close cdkFocusInitial>Ok</button>
+</div>
