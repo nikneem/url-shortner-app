@@ -5,20 +5,17 @@
       <form [formGroup]="urlForm">
         <mat-card>
           <mat-card-header>
-            <mat-card-title>
-              <h2 translate>pages.landing.title</h2>
-            </mat-card-title>
+            <mat-card-title translate> pages.landing.title </mat-card-title>
             <mat-card-subtitle translate
               >pages.landing.subtitle</mat-card-subtitle
             >
           </mat-card-header>
           <mat-card-content>
             <p translate>pages.landing.explainer</p>
-            <mat-form-field appearance="outline" class="full-with">
+            <mat-form-field appearance="outline" class="full-width">
               <mat-label translate>pages.landing.paste-here</mat-label>
               <input
                 matInput
-                placeholder="Placeholder"
                 formControlName="url"
                 (keyup.enter)="textboxEnterPressed()"
               />
@@ -28,10 +25,9 @@
             <button
               mat-flat-button
               color="primary"
-              translate
               [disabled]="urlForm.pristine || !urlForm.valid"
             >
-              buttons.create
+              <span translate>button.create</span>
             </button>
           </mat-card-actions>
         </mat-card>

@@ -3,16 +3,21 @@
   <div *ngIf="shortLinkDetailsForm">
     <form [formGroup]="shortLinkDetailsForm" novalidate>
       <mat-form-field class="full-with">
-        <mat-label>shortlinks.details.shortlink</mat-label>
+        <mat-label translate>shortlinks.details.short-link</mat-label>
         <input matInput formControlName="shortLink" />
       </mat-form-field>
       <mat-form-field class="full-with">
-        <mat-label>shortlinks.details.targetUrl</mat-label>
-        <input matInput formControlName="targetUrl" />
+        <mat-label translate>shortlinks.details.target-url</mat-label>
+        <input matInput formControlName="targetUrl" readonly />
       </mat-form-field>
-      <mat-form-field class="full-with">
-        <mat-label>shortlinks.details.expiresOn</mat-label>
-        <input matInput formControlName="expiresOn" />
+      <mat-form-field>
+        <mat-label translate>shortlinks.details.expires-on</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="expiresOn" />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </form>
   </div>

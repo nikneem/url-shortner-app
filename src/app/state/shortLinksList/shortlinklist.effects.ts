@@ -17,7 +17,7 @@ export class ShortLinkListEffects {
       ofType(ShortLinkListActions.list),
       exhaustMap((act) =>
         this.shortLinksService.list(act.query).pipe(
-          map((links) => ShortLinkApiActions.listreceived({ list: links })),
+          map((links) => ShortLinkApiActions.listReceived({ list: links })),
           catchError(() => EMPTY)
         )
       )

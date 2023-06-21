@@ -12,7 +12,7 @@ export const shortLinksApiReducer = createReducer(
     ...state,
     isLoading: true,
   })),
-  on(ShortLinkApiActions.listreceived, (state, { list }) => ({
+  on(ShortLinkApiActions.listReceived, (state, { list }) => ({
     ...state,
     isLoading: false,
     shortLinks: list,

@@ -28,7 +28,10 @@
       }
     },
     "details": {
-      "title": "Shortlink details"
+      "title": "Shortlink details",
+      "short-link": "Short code",
+      "target-url": "Target URL",
+      "expires-on": "Expiry date"
     }
   },
   "dialog": {
@@ -38,7 +41,8 @@
     }
   },
   "button": {
+    "ok": "OK",
     "cancel": "Cancel",
-    "ok": "OK"
+    "create": "Create"
   }
 }
