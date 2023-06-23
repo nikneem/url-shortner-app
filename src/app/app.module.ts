@@ -79,6 +79,15 @@ export function createTranslateLoader(http: HttpClient) {
             },
           },
           {
+            uri: 'https://dev-tinylnk-api-weu-app.azurewebsites.net/api/*',
+            tokenOptions: {
+              authorizationParams: {
+                audience: 'https://api.tinylnk.nl',
+                scope: 'read:shortlinks write:shortlinks',
+              },
+            },
+          },
+          {
             uri: 'https://localhost:7098/api/*',
             tokenOptions: {
               authorizationParams: {
