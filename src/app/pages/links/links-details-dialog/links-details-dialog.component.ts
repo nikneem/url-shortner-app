@@ -1,8 +1,25 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  AsyncValidatorFn,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import {
+  Observable,
+  Subscription,
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  of,
+  switchMap,
+} from 'rxjs';
+import { ShortlinkService } from 'src/app/services/shortlink.service';
 import { IAppState } from 'src/app/state/app.state';
 import { ShortLinkActions } from 'src/app/state/shortlinkdetails/shortlinkdetails.actions';
 import { IShortLinkDetailsDto } from 'src/app/state/shortlinkdetails/shortlinkdetails.models';
@@ -26,27 +43,49 @@ export class LinksDetailsDialogComponent implements OnInit {
 
   constructor(
     private store: Store<IAppState>,
-    private dialogRef: MatDialogRef<LinksDetailsDialogComponent>
+    private dialogRef: MatDialogRef<LinksDetailsDialogComponent>,
+    private shortLinkService: ShortlinkService
   ) {}
 
   private constructForm(): void {
     if (this.linkDetails && this.id !== this.linkDetails.id) {
       this.shortLinkDetailsForm = new FormGroup({
         id: new FormControl(this.linkDetails.id, [Validators.required]),
-        shortCode: new FormControl(this.linkDetails.shortCode, [
-          Validators.required,
-        ]),
+        shortCode: new FormControl(
+          this.linkDetails.shortCode,
+          [Validators.required],
+          [this.uniqueCardAccountValidatorFn()]
+        ),
         targetUrl: new FormControl(this.linkDetails.targetUrl, [
           Validators.required,
         ]),
         expiresOn: new FormControl(this.linkDetails.expiresOn),
       });
+
       this.id = this.linkDetails.id;
     }
   }
 
+  uniqueCardAccountValidatorFn(): AsyncValidatorFn {
+    return (control) =>
+      control.valueChanges.pipe(
+        debounceTime(250),
+        distinctUntilChanged(),
+        switchMap((value) => {
+          const idControlValue = control.parent?.get('id')?.value ?? '';
+          return this.shortLinkService.isUnique(idControlValue, value);
+        }),
+        map(() => null),
+        catchError(() => of({ codeNotUnique: true }))
+      ); // important to make observable finite
+  }
+
   save(): void {
-    if (this.linkDetails && this.shortLinkDetailsForm?.valid) {
+    if (
+      this.linkDetails &&
+      this.shortLinkDetailsForm &&
+      !this.shortLinkDetailsForm.invalid
+    ) {
       let shortLinkDetails: IShortLinkDetailsDto =
         this.shortLinkDetailsForm.value;
       this.store.dispatch(

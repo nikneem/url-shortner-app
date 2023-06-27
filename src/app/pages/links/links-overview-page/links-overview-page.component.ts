@@ -32,14 +32,7 @@ export class LinksOverviewPageComponent implements OnInit {
   }
   public openDetailsDialog(row: IShortLinkDetailsDto) {
     this.store.dispatch(ShortLinkActions.receive({ id: row.id }));
-    this.dialog
-      .open(LinksDetailsDialogComponent)
-      .afterClosed()
-      .subscribe((result) => {
-        if (result.result === 'ok') {
-          // this.store.dispatch(ShortLinkActions.delete({ id }));
-        }
-      });
+    this.dialog.open(LinksDetailsDialogComponent);
   }
   ngOnInit(): void {
     this.store.dispatch(ShortLinkListActions.list({ query: '' }));

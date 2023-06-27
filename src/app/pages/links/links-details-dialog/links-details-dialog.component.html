@@ -36,7 +36,7 @@
       [disabled]="
         !shortLinkDetailsForm ||
         shortLinkDetailsForm.pristine ||
-        !shortLinkDetailsForm.valid
+        shortLinkDetailsForm.invalid
       "
       (click)="save()"
     >
