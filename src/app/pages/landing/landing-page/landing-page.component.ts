@@ -60,6 +60,9 @@ export class LandingPageComponent implements OnInit {
       .subscribe((shortLinkDetails) => {
         if (shortLinkDetails?.state === 'added') {
           this.shortLinkDetails = shortLinkDetails.shortLink;
+          if (this.urlForm) {
+            this.urlForm.patchValue({ url: '' });
+          }
         }
       });
   }
