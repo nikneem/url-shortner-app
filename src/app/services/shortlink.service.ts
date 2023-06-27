@@ -10,7 +10,7 @@ import {
   providedIn: 'root',
 })
 export class ShortlinkService {
-  private serviceUrl: string = 'https://localhost:7098';
+  private serviceUrl: string = 'https://api.tinylnk.nl';
   constructor(private http: HttpClient) {}
 
   public list(query?: string): Observable<IShortLinksListDto> {
