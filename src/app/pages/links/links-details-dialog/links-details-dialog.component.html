@@ -22,9 +22,9 @@
       </mat-form-field>
     </form>
   </div>
+  <app-page-loading [show]="isLoading"></app-page-loading>
 </div>
 <div mat-dialog-actions align="end">
-  <app-loading [show]="isLoading"></app-loading>
   <div class="flex-spacer" *ngIf="shortLinkDetailsForm">
     <button mat-button mat-dialog-close color="accent">
       <span translate>button.cancel</span>

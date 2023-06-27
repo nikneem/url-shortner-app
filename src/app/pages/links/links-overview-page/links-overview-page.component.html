@@ -26,7 +26,7 @@
       </ng-container>
 
       <!-- Actions -->
-      <ng-container matColumnDef="actions">
+      <!-- <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef translate>
           shortlinks.list.columns.actions
         </mat-header-cell>
@@ -40,18 +40,15 @@
             <mat-icon>delete</mat-icon>
           </button>
         </mat-cell>
-      </ng-container>
+      </ng-container> -->
 
       <!-- Header and Row Declarations -->
       <mat-header-row
-        *matHeaderRowDef="['shortCode', 'targetUrl', 'createdOn', 'actions']"
+        *matHeaderRowDef="['shortCode', 'targetUrl', 'createdOn']"
       >
       </mat-header-row>
       <mat-row
-        *matRowDef="
-          let row;
-          columns: ['shortCode', 'targetUrl', 'createdOn', 'actions']
-        "
+        *matRowDef="let row; columns: ['shortCode', 'targetUrl', 'createdOn']"
         (click)="openDetailsDialog(row)"
       >
       </mat-row>

@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@auth0/auth0-angular';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { ShortlinkService } from 'src/app/services/shortlink.service';
 import { IAppState } from 'src/app/state/app.state';
 import { ShortLinkActions } from 'src/app/state/shortlinkdetails/shortlinkdetails.actions';
+import { IShortLinkDetailsDto } from 'src/app/state/shortlinkdetails/shortlinkdetails.models';
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
@@ -12,6 +14,8 @@ import { ShortLinkActions } from 'src/app/state/shortlinkdetails/shortlinkdetail
 })
 export class LandingPageComponent implements OnInit {
   public urlForm: FormGroup;
+  public shortLinkDetails?: IShortLinkDetailsDto;
+  private shortLinkDetailsChanged?: Subscription;
 
   constructor(public auth: AuthService, private store: Store<IAppState>) {
     this.urlForm = new FormGroup({
@@ -24,17 +28,22 @@ export class LandingPageComponent implements OnInit {
     });
   }
 
-  textboxEnterPressed() {
-    console.log(this.urlForm.controls['url'].value);
-    this.store.dispatch(
-      ShortLinkActions.add({ endpointUrl: this.urlForm.controls['url'].value })
-    );
-  }
   login() {
     this.auth.loginWithRedirect();
   }
   logout() {
     this.auth.logout({ logoutParams: { returnTo: document.location.origin } });
+  }
+
+  createShortLink() {
+    console.log(this.urlForm.controls['url'].value);
+    if (this.urlForm.valid) {
+      this.store.dispatch(
+        ShortLinkActions.add({
+          endpointUrl: this.urlForm.controls['url'].value,
+        })
+      );
+    }
   }
 
   ngOnInit(): void {
@@ -46,5 +55,12 @@ export class LandingPageComponent implements OnInit {
         });
       }
     });
+    this.shortLinkDetailsChanged = this.store
+      .select((str) => str.shortLinkDetails)
+      .subscribe((shortLinkDetails) => {
+        if (shortLinkDetails?.state === 'added') {
+          this.shortLinkDetails = shortLinkDetails.shortLink;
+        }
+      });
   }
 }

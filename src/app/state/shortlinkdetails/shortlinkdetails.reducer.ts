@@ -28,6 +28,7 @@ export const shortLinksReducer = createReducer(
     ...state,
     isLoading: false,
     shortLink: shortLink,
+    state: 'added',
   })),
   on(ShortLinkApiActions.received, (state, { shortLink }) => ({
     ...state,
