@@ -15,7 +15,7 @@ import { LinksDetailsDialogComponent } from '../links-details-dialog/links-detai
 })
 export class LinksOverviewPageComponent implements OnInit {
   public dataSource: Array<IShortLinkDetailsDto>;
-
+  isLoading: boolean = false;
   constructor(private store: Store<AppState>, private dialog: MatDialog) {
     this.dataSource = [];
   }
@@ -46,6 +46,7 @@ export class LinksOverviewPageComponent implements OnInit {
 
     this.store.select('shortLinkList').subscribe((state) => {
       this.dataSource = state.shortLinks?.shortLinks ?? [];
+      this.isLoading = state.isLoading;
     });
   }
 }

@@ -42,7 +42,7 @@ export class ShortLinkDetailsEffects {
       exhaustMap((act) =>
         this.shortLinksService.update(act.id, act.dto).pipe(
           map((shortLink) =>
-            ShortLinkApiActions.received({ shortLink: shortLink })
+            ShortLinkApiActions.updated({ shortLink: act.dto })
           ),
           catchError(() => EMPTY)
         )

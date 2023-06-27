@@ -2,9 +2,10 @@
 <div mat-dialog-content>
   <div *ngIf="shortLinkDetailsForm">
     <form [formGroup]="shortLinkDetailsForm" novalidate>
+      <input type="hidden" formControlName="id" />
       <mat-form-field class="full-with">
         <mat-label translate>shortlinks.details.short-link</mat-label>
-        <input matInput formControlName="shortLink" />
+        <input matInput formControlName="shortCode" />
       </mat-form-field>
       <mat-form-field class="full-with">
         <mat-label translate>shortlinks.details.target-url</mat-label>
@@ -22,7 +23,24 @@
     </form>
   </div>
 </div>
-<div mat-dialog-actions>
-  <button mat-button mat-dialog-close>No</button>
-  <button mat-button mat-dialog-close cdkFocusInitial>Ok</button>
+<div mat-dialog-actions align="end">
+  <app-loading [show]="isLoading"></app-loading>
+  <div class="flex-spacer" *ngIf="shortLinkDetailsForm">
+    <button mat-button mat-dialog-close color="accent">
+      <span translate>button.cancel</span>
+    </button>
+    <button
+      mat-button
+      cdkFocusInitial
+      color="primary"
+      [disabled]="
+        !shortLinkDetailsForm ||
+        shortLinkDetailsForm.pristine ||
+        !shortLinkDetailsForm.valid
+      "
+      (click)="save()"
+    >
+      <span translate>button.save</span>
+    </button>
+  </div>
 </div>

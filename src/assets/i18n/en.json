@@ -43,6 +43,7 @@
   "button": {
     "ok": "OK",
     "cancel": "Cancel",
+    "save": "Save",
     "create": "Create"
   }
 }

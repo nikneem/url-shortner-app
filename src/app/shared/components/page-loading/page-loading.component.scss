@@ -1,0 +1,11 @@
+.loading-component {
+  height: calc(100vh - 64px);
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+
+  .loading-panel {
+    width: 50%;
+    text-align: center;
+  }
+}
