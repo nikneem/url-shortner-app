@@ -6,9 +6,16 @@ import { LinksOverviewPageComponent } from './links-overview-page/links-overview
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { LinksDetailsDialogComponent } from './links-details-dialog/links-details-dialog.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [LinksOverviewPageComponent, LinksDetailsDialogComponent],
-  imports: [CommonModule, LinksRoutingModule, SharedModule, TranslateModule],
+  imports: [
+    CommonModule,
+    LinksRoutingModule,
+    SharedModule,
+    TranslateModule,
+    QRCodeModule,
+  ],
 })
 export class LinksModule {}

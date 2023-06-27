@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { SafeUrl } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 import {
   Observable,
@@ -35,9 +36,10 @@ export interface IShortLinkDetailsDialogData {
 })
 export class LinksDetailsDialogComponent implements OnInit {
   private linkDetailsChangedSubscription?: Subscription;
-  private linkDetails?: IShortLinkDetailsDto;
+  public linkDetails?: IShortLinkDetailsDto;
   private id?: string;
   isLoading: boolean = false;
+  public qrCodeDownloadLink: SafeUrl = '';
 
   shortLinkDetailsForm?: FormGroup;
 
@@ -46,6 +48,10 @@ export class LinksDetailsDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<LinksDetailsDialogComponent>,
     private shortLinkService: ShortlinkService
   ) {}
+
+  onChangeURL(url: SafeUrl) {
+    this.qrCodeDownloadLink = url;
+  }
 
   private constructForm(): void {
     if (this.linkDetails && this.id !== this.linkDetails.id) {
