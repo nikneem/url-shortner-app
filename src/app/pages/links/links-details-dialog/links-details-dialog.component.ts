@@ -62,7 +62,7 @@ export class LinksDetailsDialogComponent implements OnInit {
           [Validators.required],
           [this.uniqueCardAccountValidatorFn()]
         ),
-        targetUrl: new FormControl(this.linkDetails.targetUrl, [
+        endpointUrl: new FormControl(this.linkDetails.endpointUrl, [
           Validators.required,
         ]),
         expiresOn: new FormControl(this.linkDetails.expiresOn),

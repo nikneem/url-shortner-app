@@ -38,7 +38,7 @@ export class LinksOverviewPageComponent implements OnInit {
     this.store.dispatch(ShortLinkListActions.list({ query: '' }));
 
     this.store.select('shortLinkList').subscribe((state) => {
-      this.dataSource = state.shortLinks?.shortLinks ?? [];
+      this.dataSource = state.shortLinks ?? [];
       this.isLoading = state.isLoading;
     });
   }

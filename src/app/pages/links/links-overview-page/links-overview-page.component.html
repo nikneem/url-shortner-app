@@ -10,11 +10,11 @@
       </ng-container>
 
       <!-- Age Definition -->
-      <ng-container matColumnDef="targetUrl">
+      <ng-container matColumnDef="endpointUrl">
         <mat-header-cell *matHeaderCellDef translate>
-          shortlinks.list.columns.targetUrl
+          shortlinks.list.columns.endpointUrl
         </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{ row.targetUrl }} </mat-cell>
+        <mat-cell *matCellDef="let row"> {{ row.endpointUrl }} </mat-cell>
       </ng-container>
 
       <!-- Title Definition -->
@@ -44,11 +44,11 @@
 
       <!-- Header and Row Declarations -->
       <mat-header-row
-        *matHeaderRowDef="['shortCode', 'targetUrl', 'createdOn']"
+        *matHeaderRowDef="['shortCode', 'endpointUrl', 'createdOn']"
       >
       </mat-header-row>
       <mat-row
-        *matRowDef="let row; columns: ['shortCode', 'targetUrl', 'createdOn']"
+        *matRowDef="let row; columns: ['shortCode', 'endpointUrl', 'createdOn']"
         (click)="openDetailsDialog(row)"
       >
       </mat-row>

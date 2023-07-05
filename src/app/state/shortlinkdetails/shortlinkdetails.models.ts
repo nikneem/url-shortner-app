@@ -8,7 +8,7 @@ export interface IShortLinksListDto {
 export interface IShortLinkDetailsDto {
   id: string;
   shortCode: string;
-  targetUrl: string;
+  endpointUrl: string;
   createdOn: Date;
   expiresOn?: Date;
 }

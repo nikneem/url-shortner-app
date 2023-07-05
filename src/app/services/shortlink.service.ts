@@ -14,12 +14,12 @@ export class ShortlinkService {
   private serviceUrl: string = environment.api_base_url;
   constructor(private http: HttpClient) {}
 
-  public list(query?: string): Observable<IShortLinksListDto> {
+  public list(query?: string): Observable<Array<IShortLinkDetailsDto>> {
     let url = `${this.serviceUrl}/api/shortlinks`;
     if (query) {
       url += `?query=${query}`;
     }
-    return this.http.get<IShortLinksListDto>(url);
+    return this.http.get<Array<IShortLinkDetailsDto>>(url);
   }
 
   public receive(id: string): Observable<IShortLinkDetailsDto> {

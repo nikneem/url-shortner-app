@@ -32,15 +32,14 @@ function shortLinkUpdatedHandler(
 ): IShortLinkListState {
   const copyState: IShortLinkListState = Object.assign({}, state);
   if (copyState.shortLinks) {
-    let shortLinks = Object.assign({}, copyState.shortLinks);
-    let shortLinkList = shortLinks.shortLinks
-      ? new Array<IShortLinkDetailsDto>(...shortLinks.shortLinks)
+    let shortLinkList = copyState.shortLinks
+      ? new Array<IShortLinkDetailsDto>(...copyState.shortLinks)
       : new Array<IShortLinkDetailsDto>();
 
     const newListItem: IShortLinkDetailsDto = {
       id: payload.id,
       shortCode: payload.shortCode,
-      targetUrl: payload.targetUrl,
+      endpointUrl: payload.endpointUrl,
       createdOn: payload.createdOn,
       expiresOn: payload.expiresOn,
     };
@@ -50,8 +49,7 @@ function shortLinkUpdatedHandler(
     } else {
       shortLinkList.push(newListItem);
     }
-    shortLinks.shortLinks = shortLinkList;
-    copyState.shortLinks = shortLinks;
+    copyState.shortLinks = shortLinkList;
   }
   return copyState;
 }

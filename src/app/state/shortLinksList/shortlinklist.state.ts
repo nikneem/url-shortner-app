@@ -1,7 +1,7 @@
-import { IShortLinksListDto } from './shortlinklist.models';
+import { IShortLinkDetailsDto } from '../shortlinkdetails/shortlinkdetails.models';
 
 export interface IShortLinkListState {
-  shortLinks?: IShortLinksListDto;
+  shortLinks?: Array<IShortLinkDetailsDto>;
   isLoading: boolean;
   errorMessage?: string;
 }

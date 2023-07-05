@@ -22,7 +22,7 @@
     "list": {
       "columns": {
         "shortCode": "Code",
-        "targetUrl": "Endpoint",
+        "endpointUrl": "Endpoint",
         "createdOn": "Created",
         "actions": "Actions"
       }

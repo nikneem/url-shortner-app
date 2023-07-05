@@ -1,8 +1,5 @@
 import { createActionGroup, props } from '@ngrx/store';
-import {
-  IShortLinkDetailsDto,
-  IShortLinksListDto,
-} from './shortlinkdetails.models';
+import { IShortLinkDetailsDto } from './shortlinkdetails.models';
 
 export const ShortLinkActions = createActionGroup({
   source: 'ShortLink',
@@ -16,7 +13,7 @@ export const ShortLinkActions = createActionGroup({
 export const ShortLinkApiActions = createActionGroup({
   source: 'ShortLinkApi',
   events: {
-    ListReceived: props<{ list: IShortLinksListDto }>(),
+    ListReceived: props<{ list: Array<IShortLinkDetailsDto> }>(),
     Added: props<{ shortLink: IShortLinkDetailsDto }>(),
     Received: props<{ shortLink: IShortLinkDetailsDto }>(),
     Updated: props<{ shortLink: IShortLinkDetailsDto }>(),
